@@ -49,11 +49,11 @@ function validateSchema(schema: EnvSchema, env: Env): EnvErrorReport | null {
         }
     }
 
-    return Object.values(report).some(value => value != null) ? report : null;
+    return Object.values(report).some((value) => value != null) ? report : null;
 }
 
 function valueExists(value: string | undefined): value is string {
-    return !(value === undefined || value === '');
+    return !(value === undefined);
 }
 
 function typeMatches(config: EnvKeyConfig, value: string): boolean {

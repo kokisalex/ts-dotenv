@@ -11,12 +11,39 @@ describe('load', () => {
             NUMBER: Number,
             REGEXP: /^abc$/,
             STRING: String,
+            EMPTY_STRING_IN_OTHER_ENV: {
+                type: String,
+                optional: false,
+                default: '.local.',
+                empty: true,
+            },
         });
         expect(env).toEqual({
             BOOLEAN: true,
             NUMBER: 1234,
             REGEXP: 'abc',
             STRING: 'Lorem ipsum',
+            EMPTY_STRING_IN_OTHER_ENV: '',
+        });
+    });
+
+    it('should load .env from the working directory, but with default value', () => {
+        const env = load({
+            BOOLEAN: Boolean,
+            NUMBER: Number,
+            REGEXP: /^abc$/,
+            STRING: String,
+            EMPTY_STRING_IN_OTHER_ENV: {
+                type: String,
+                default: '.local',
+            },
+        });
+        expect(env).toEqual({
+            BOOLEAN: true,
+            NUMBER: 1234,
+            REGEXP: 'abc',
+            STRING: 'Lorem ipsum',
+            EMPTY_STRING_IN_OTHER_ENV: '.local',
         });
     });
 

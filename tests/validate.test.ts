@@ -111,8 +111,8 @@ describe('validate', () => {
             expect(() => validate(schema, env)).not.toThrow();
         });
 
-        it('should reject empty strings', () => {
-            const env = { KEY: '' };
+        it('should reject undefined strings', () => {
+            const env = { KEY: undefined };
             expect(() => validate(schema, env)).toThrow(EnvError);
         });
     });

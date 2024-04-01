@@ -6,10 +6,7 @@ type CoercedEnv = {
     [key: string]: boolean | Buffer | number | string | undefined;
 };
 
-export function coerce<S extends EnvSchema>(
-    schema: S,
-    env: ValidatedEnv,
-): EnvType<S> {
+export function coerce<S extends EnvSchema>(schema: S, env: ValidatedEnv): EnvType<S> {
     const coerced: CoercedEnv = {};
 
     for (const [key, schemaValue] of Object.entries(schema)) {
@@ -17,7 +14,7 @@ export function coerce<S extends EnvSchema>(
         const config = normalize(schemaValue);
 
         if (config.default !== undefined && (value === '' || value === undefined)) {
-            coerced[key] = config.default;
+            coerced[key] = !!config.empty ? value : config.default;
             continue;
         }
 

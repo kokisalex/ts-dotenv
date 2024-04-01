@@ -10,6 +10,7 @@ export interface EnvKeyConfig {
     type: EnvSchemaType;
     optional: boolean;
     default?: boolean | Buffer | number | string;
+    empty?: true;
 }
 
 export type EnvSchemaValue = DefaultValueKeyConfig | OptionalKeyConfig | EnvSchemaType;
@@ -51,6 +52,7 @@ interface DefaultNumberKeyConfig {
 interface DefaultStringKeyConfig {
     type: StringConstructor | RegExp | Array<string>;
     default: string;
+    empty?: true;
 }
 
 /**
